@@ -1,0 +1,24 @@
+{% extends 'partials/base.html'%}
+{% block content%}
+<h1 class="pt-3 ps-3">All the new films</h1>
+<div class="row">
+{% for film in films%}
+<div class="card " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{film.title}} BY {%for dir in film.director_set.all%}{{dir.first_name}} {{dir.last_name}}{%endfor%}</h5>
+    <p class="card-text">Date: {{film.release_date}}</p>
+    <p class="card-text">Category: {% for cat in film.category.all%}{{cat.name}} {%endfor%}</p>
+    <p class="card-text">Country: {{film.created_in_country}}</p>
+    <div class="card-body">
+      {%for dir in film.director_set.all%}
+    <a href="{% url 'edit_director' dir.id %}" class="card-link">Modify the director</a>
+      {%endfor%}
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><a href="{% url 'edit_film' film.id %}" class="card-link">Modify the film</a></li>
+  </ul>
+</div>
+{%endfor%}
+</div>
+{%endblock%}

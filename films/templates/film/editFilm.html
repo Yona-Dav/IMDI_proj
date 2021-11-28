@@ -1,0 +1,13 @@
+{% extends 'partials/base.html'%}
+{%block content%}
+<h1 class="ps-5 pt-3">Edit Film</h1>
+
+<form method = 'post'>
+    {% csrf_token %}
+    <ul>
+    {{form.as_p}}
+
+    <button>Add</button>
+    </ul>
+</form>
+{%endblock%}
