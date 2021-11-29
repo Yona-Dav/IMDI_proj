@@ -1,0 +1,14 @@
+{% extends 'partials/base.html'%}
+{%block content%}
+{% if request.user.is_authenticated %}
+<div class="card " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Mon profil</h5>
+    <p class="card-text">Username: {{request.user.username}}</p>
+    <p class="card-text">First Name: {{request.user.first_name}}</p>
+    <p class="card-text">Last Name: {{request.user.last_name}}</p>
+  </div>
+</div>
+{%endif%}
+
+{% endblock %}

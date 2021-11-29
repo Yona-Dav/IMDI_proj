@@ -9,6 +9,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, DeleteView,
 class FilmListView(ListView):
     template_name = 'homepage.html'
     model = Film
+    #queryset = Film.object.all().order_by('-release_date')
     context_object_name = 'films'
 
 
