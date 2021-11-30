@@ -105,8 +105,9 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 class RatingCreateView(LoginRequiredMixin, CreateView):
     model = RatingFilm
-    fields = ['ratings']
-    template_name = 'film/film_detail.html'
+    fields = ['rating']
+    template_name = 'film/rating.html'
+    success_url = reverse_lazy('homepage')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -115,7 +116,7 @@ class RatingCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.owner = self.request.user
+        self.object.user = self.request.user
         film_id = self.kwargs['film_id']
         film = Film.objects.get(id=film_id)
         self.object.film = film

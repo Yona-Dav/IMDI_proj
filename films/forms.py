@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Director, Category
+from .models import Film, Director, Category, RatingFilm
 
 
 class AddFilmForm(forms.ModelForm):
@@ -16,12 +16,12 @@ class AddFilmForm(forms.ModelForm):
         field_order = ['title','release_date', 'category', 'country']
 
 
-
 class AddDirectorForm(forms.ModelForm):
     film = forms.ModelMultipleChoiceField(
         queryset=Film.objects.all(),
         widget=forms.CheckboxSelectMultiple
     )
+
     class Meta:
         model = Director
         fields = '__all__'
@@ -33,3 +33,7 @@ class EditDirectorForm(forms.ModelForm):
         exclude = ['film']
 
 
+class RatingFilmForm(forms.ModelForm):
+    class Meta:
+        model = RatingFilm
+        fields = ['rating']

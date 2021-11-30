@@ -52,9 +52,15 @@ class CommentFilm(models.Model):
 
 
 class RatingFilm(models.Model):
-    ratings = GenericRelation(Rating, related_query_name='rated')
+    RATINGS = (
+        ('*', '*'),
+        ('* *', '* *'),
+        ('* * *', '* * *'),
+        ('* * * *', '* * * *'),
+        ('* * * * *', '* * * * *'))
+    rating = models.CharField(max_length=100,choices=RATINGS)
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='rating')
-    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('rating', kwargs={'film_id': self.film.id})
