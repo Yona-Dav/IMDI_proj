@@ -1,5 +1,9 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
+from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 # Create your models here.
 
@@ -36,3 +40,21 @@ class Director(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+class CommentFilm(models.Model):
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='comments')
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('comment', kwargs={'film_id': self.film.id})
+
+
+class RatingFilm(models.Model):
+    ratings = GenericRelation(Rating, related_query_name='rated')
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='rating')
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('rating', kwargs={'film_id': self.film.id})

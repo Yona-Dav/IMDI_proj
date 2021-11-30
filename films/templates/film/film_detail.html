@@ -1,0 +1,23 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+<div class="card " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{film.title}} BY {%for dir in film.director_set.all%}{{dir.first_name}} {{dir.last_name}}{%endfor%}</h5>
+    <p class="card-text">Date: {{film.release_date}}</p>
+    <p class="card-text">Category: {% for cat in film.category.all%}{{cat.name}} {%endfor%}</p>
+    <p class="card-text">Country: {{film.created_in_country}}</p>
+  </div>
+</div>
+<p><b>Comments</b></p>
+<ul>
+    {% for comment in film.comments.all %}
+    <li>{{ comment.content }} by {{comment.owner.username}} since {{comment.timestamp | timesince }}</li>
+    {% endfor %}
+</ul>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+    <button>Save Comment</button>
+    </form>
+{% endblock %}
