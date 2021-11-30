@@ -6,6 +6,7 @@
 <div class="alert alert-warning">{{message}}<br></div>
 {%endfor%}
 {%endif%}
+<div class="container">
 <h1 class="pt-3 ps-3">All the new films</h1>
 <div class="row">
 {% for film in films%}
@@ -36,6 +37,7 @@
   <a href="{% url 'rate' film.id %}" class="btn">Rate the film</a>
 </div>
 {%endfor%}
+</div>
 </div>
 {% endif%}
 {%endblock%}

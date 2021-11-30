@@ -1,12 +1,12 @@
 {% extends 'partials/base.html'%}
+{% load crispy_forms_tags %}
 {%block content%}
-<form method="post">
-  {% csrf_token %}
-  <ul>
-    {{form.as_ul}}
-  </ul>
+<form class="ps-5 pt-3 pe-3" method = 'post'>
+    {% csrf_token %}
 
-  <button>Login in</button>
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-primary">Login In</button>
 
 </form>
 {% endblock %}

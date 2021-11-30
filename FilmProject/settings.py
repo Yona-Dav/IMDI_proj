@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'films',
-    'star_ratings'
+    'star_ratings',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGOUT_REDIRECT_URL = 'homepage'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 try:

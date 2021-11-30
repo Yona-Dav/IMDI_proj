@@ -1,13 +1,13 @@
 {% extends 'partials/base.html'%}
+{% load crispy_forms_tags %}
 {%block content%}
 <h1 class="ps-5 pt-3">Add Film</h1>
 
-<form method = 'post'>
+<form class="ps-5 pt-3 pe-3" method = 'post'>
     {% csrf_token %}
-    <ul>
-    {{form.as_p}}
 
-    <button>Add</button>
-    </ul>
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-primary">Add</button>
 </form>
 {%endblock%}
